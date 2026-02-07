@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Oracle Forensic System - Login</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/ui.js') }}"></script>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <div class="header reveal">
+    <h2 class="title">ORACLE FORENSIC SYSTEM</h2>
+    <p>Authorized Accident Investigation Portal</p>
+  </div>
+
+  <!-- ================= LOGIN CARD ================= -->
+  <div class="container">
+    <div class="card glass reveal" style="max-width:420px;margin:auto;">
+
+      <h3 class="section-title">Investigator Login</h3>
+
+      <form method="POST">
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter investigator ID" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter secure password" required>
+
+        <br>
+        <button class="btn" style="width:100%" id="loginBtn">
+          Login to System
+        </button>
+      </form>
+
+      <!-- ===== FLASH MESSAGE ===== -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <p style="color:red;text-align:center;margin-top:12px;">
+            {{ messages[0] }}
+          </p>
+        {% endif %}
+      {% endwith %}
+
+    </div>
+  </div>
+
+</body>
+</html>

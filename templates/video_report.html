@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Video Forensic Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    /* Frame Grid Styles */
+    .frame-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .frame-thumb {
+      width: 160px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.2s;
+    }
+    .frame-thumb:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,160,255,0.6);
+      cursor: pointer;
+    }
+    
+    /* Meta List Styles */
+    .meta-list {
+      list-style: none;
+      padding: 0;
+      color: #ccc;
+    }
+    .meta-list li {
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 8px;
+    }
+    .meta-list b {
+      color: #fff;
+      display: inline-block;
+      width: 150px;
+    }
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #00d2ff;
+      word-break: break-all;
+    }
+
+    /* Plate Table Styles */
+    .plate-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      color: #eee;
+      font-size: 0.95rem;
+    }
+    .plate-table th {
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 10px;
+      color: #00d2ff;
+      font-weight: 600;
+      background: rgba(255,255,255,0.05);
+    }
+    .plate-table td {
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .plate-table tr:hover td {
+        background: rgba(255,255,255,0.02);
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h2 class="title">VIDEO FORENSIC REPORT</h2>
+  <p>Case ID: {{ result.case.case_id }}</p>
+</div>
+
+<div class="container">
+
+  <div class="card glass">
+    <h3 class="section-title">1. Video Evidence</h3>
+    <video controls width="100%">
+      <source src="{{ url_for('view_video', filename=result.video.filename) }}">
+      Your browser does not support video playback.
+    </video>
+  </div>
+
+  <div class="card glass">
+    <h3 class="section-title">2. Timeline Reconstruction</h3>
+    {% if result.timeline %}
+      <ul style="padding-left: 20px; color: #ccc;">
+        {% for t in result.timeline %}
+          <li style="margin-bottom: 5px;">
+            <b>T+{{ t.timestamp_sec }}s</b> — Frame: {{ t.frame }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">Timeline reconstruction pending.</p>
+    {% endif %}
+  </div>
+
+  <div class="card glass">
+    <h3 class="section-title">3. AI Narrative Reconstruction</h3>
+    <p>{{ result.narrative.reconstruction }}</p>
+  </div>
+
+  <div class="card glass">
+    <h3 class="section-title">4. Extracted Frame Evidence</h3>
+  
+    {% if result.timeline %}
+      <div class="frame-grid">
+        {% for t in result.timeline %}
+          <a href="{{ url_for('view_video_frame', 
+                              case_id=result.case.case_id, 
+                              filename=t.frame) }}" 
+             target="_blank">
+            <img 
+              src="{{ url_for('view_video_frame', 
+                              case_id=result.case.case_id, 
+                              filename=t.frame) }}" 
+              class="frame-thumb"
+              alt="Extracted Frame {{ t.frame }}"
+              title="Time: {{ t.timestamp_sec }}s"
+            >
+          </a>
+        {% endfor %}
+      </div>
+      <p class="muted" style="margin-top:15px;">
+        <small>Click any thumbnail to view the full-resolution evidence frame.</small>
+      </p>
+    {% else %}
+      <p class="muted">No extracted frames available.</p>
+    {% endif %}
+  </div>
+
+  <div class="card glass">
+    <h3 class="section-title">5. Video Analysis Summary</h3>
+    <p>
+      Total Frames Analyzed: {{ result.scene.total_frames_analyzed }}<br>
+      Video FPS: {{ result.scene.video_fps }}<br>
+      Severity Level: {{ result.analysis.severity.level }}
+    </p>
+  </div>
+  
+  <div class="card glass">
+    <h3 class="section-title">6. Chain of Custody</h3>
+
+    {% if result.chain_of_custody %}
+      <ul class="meta-list">
+        <li>
+          <b>File Hash (SHA-256):</b><br>
+          <code>{{ result.chain_of_custody.file_hash }}</code>
+        </li>
+
+        <li>
+          <b>Handled By:</b>
+          {{ result.chain_of_custody.handled_by }}
+        </li>
+
+        <li>
+          <b>Timestamp:</b>
+          {{ result.chain_of_custody.timestamp }}
+        </li>
+      </ul>
+    {% else %}
+      <p class="muted">Chain of custody data unavailable.</p>
+    {% endif %}
+  </div>
+
+  <div class="card glass">
+    <h3 class="section-title">7. Detected License Plates</h3>
+  
+    {% if result.license_plates and result.license_plates|length > 0 %}
+      <table class="plate-table">
+        <tr>
+          <th>Plate Number</th>
+          <th>Timestamp (s)</th>
+          <th>Confidence</th>
+          <th>Frame</th>
+        </tr>
+  
+        {% for p in result.license_plates %}
+          <tr>
+            <td><b style="color:#00d2ff">{{ p.plate }}</b></td>
+            <td>T+{{ p.timestamp_sec }}s</td>
+            <td>{{ p.confidence }}</td>
+            <td>{{ p.frame }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p class="muted">No license plates detected in video.</p>
+    {% endif %}
+  </div>
+
+  <div class="actions center" style="margin-top: 30px; margin-bottom: 40px; text-align: center;">
+    
+    <a class="btn" href="{{ url_for('download_pdf', case_id=result.case.case_id) }}" style="margin-right: 10px;">
+      📄 Download PDF Report
+    </a>
+
+    <a class="btn" href="/dashboard" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+      ← Back to Dashboard
+    </a>
+
+  </div>
+
+</div>
+
+</body>
+</html>

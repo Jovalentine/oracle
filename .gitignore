@@ -1,0 +1,42 @@
+# =========================
+# Python
+# =========================
+_pycache_/
+*.pyc
+*.pyo
+*.pyd
+
+# =========================
+# Virtual Environment
+# =========================
+.jill/
+venv/
+env/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+
+# =========================
+# Model / Cache Files
+# =========================
+*.pt
+*.h5
+*.onnx
+.cache/
+.deepface/
+
+# =========================
+# Uploads / Outputs (optional)
+# =========================
+data/uploads/
+data/outputs/
+data/reports/

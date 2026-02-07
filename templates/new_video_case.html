@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Video Investigation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="header">
+  <h2 class="title">VIDEO FORENSIC INVESTIGATION</h2>
+  <p>Upload accident video evidence</p>
+</div>
+
+<div class="container">
+  <div class="card glass" style="max-width:520px;margin:auto;">
+    <form method="POST" enctype="multipart/form-data">
+      <label>Upload Accident Video</label>
+      <input type="file" name="video" accept="video/*" required>
+      <button class="btn full">Analyze Video</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

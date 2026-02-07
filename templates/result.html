@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Result</title></head>
+<body>
+  <h2>Scene Caption</h2>
+  <p>{{ result.caption }}</p>
+
+  <h2>Fault Estimation</h2>
+  <ul>
+  {% for f in result.fault %}
+    <li>Vehicle {{ f.vehicle_index }} ({{ f.label }}): <b>{{ f.percent }}%</b></li>
+  {% endfor %}
+  </ul>
+
+  <h2>Explanation</h2>
+  <p>{{ result.explanation }}</p>
+
+  <h2>Annotated Image</h2>
+  <img src="/download/{{ result.image_out.split('/')[-1] }}" style="max-width: 90%;">
+  <p><a href="/download/{{ result.image_out.split('/')[-1] }}">Download annotated image</a></p>
+
+  <p><a href="/">Analyze another image</a></p>
+</body>
+</html>

@@ -1,0 +1,73 @@
+Step-by-Step Build Plan (2–3 days to MVP)
+
+Day 1
+
+Create venv, install requirements.txt.
+
+Put yolov8n.pt in models/yolo/.
+
+Wire Detector → print JSON detections.
+
+Add Captioner → print caption.
+
+Combine both in pipeline.run().
+#completed 
+
+Day 2
+
+Implement rules in reasoning.py + annotate.py.
+
+Build Flask routes + HTML pages.
+
+Test with 10–20 images (varied scenes).
+
+Day 3
+
+Add optional easyocr for plates.
+
+Add /history with MongoDB (store result dict, timestamps).
+
+Polish UI + add simple confidence badges.
+
+##############################Algorithm used############################
+The system takes an accident image as input (uploaded by user or investigator).
+
+Object Detection using YOLOv8
+
+YOLOv8 detects all relevant objects such as cars, trucks, motorcycles, pedestrians, and lanes.
+
+Each detected object includes a bounding box, class label, and confidence score.
+
+Scene Caption Generation using BLIP Model
+
+The BLIP vision-language model analyzes the same image and generates a textual caption, describing the overall scene (e.g., “a motorcycle lying on the road beside a car”).
+
+This helps understand the context and event semantics.
+
+Forensic Reasoning and Fault Estimation
+
+The reasoning module uses spatial data (object positions, overlaps, alignment, and size) to determine collision type and possible cause.
+
+Heuristic rules are applied:
+
+If a vehicle is behind another → possible rear-end fault.
+
+If a motorcycle is fallen → other vehicle likely responsible.
+
+If overlap detected → impact zone identified.
+
+Fault Scoring
+
+Each detected vehicle receives a fault percentage based on these rules.
+
+Scores are normalized to show relative fault contribution.
+
+Report and Visualization Generation
+
+The output includes:
+
+Annotated image with detection boxes.
+
+Fault percentage table.
+
+Caption-based explanation of the event.

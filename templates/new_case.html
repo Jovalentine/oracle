@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Investigation - Oracle Forensic System</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script defer src="{{ url_for('static', filename='js/ui.js') }}"></script>
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <div class="header reveal">
+    <h2 class="title">NEW FORENSIC INVESTIGATION</h2>
+    <p>Upload accident scene evidence for forensic analysis</p>
+  </div>
+
+  <!-- ================= MAIN CARD ================= -->
+  <div class="container">
+
+    <div class="card glass reveal" style="max-width:520px;margin:auto;">
+
+      <h3 class="section-title center">Accident Evidence Upload</h3>
+
+      <form method="POST" enctype="multipart/form-data" onsubmit="return startLoading()">
+
+       <label>Upload Accident Scene Image</label>
+         <input type="file" name="image" accept="image/*" required>
+
+         <button id="analyzeBtn" class="btn full">
+           Analyze Scene
+          </button>
+
+            <!-- ===== Loader (hidden by default) ===== -->
+           <div id="loader" class="ai-loader hidden">
+          <div class="energy-core"></div>
+           <div class="scan-ring"></div>
+           <p>Analyzing forensic evidence...</p>
+         </div>
+
+      <br>
+        <div class="back-area">
+        <a href="/dashboard" class="back-dashboard">← Back to Dashboard</a>
+        </div>
+
+        </form>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

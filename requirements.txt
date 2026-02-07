@@ -1,0 +1,16 @@
+flask==3.0.0
+python-dotenv==1.0.1
+ultralytics==8.0.196
+# Force CPU versions to keep Docker image small
+torch==2.1.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+torchvision==0.16.0+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+opencv-python-headless
+numpy==1.26.4
+Pillow==10.4.0
+transformers==4.44.2
+easyocr==1.7.1
+reportlab>=4.0.0
+fpdf
+pymongo
+bcrypt
+gunicorn

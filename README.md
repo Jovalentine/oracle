@@ -1,7 +1,3 @@
-Here is a professional and complete **README.md** file for your GitHub repository. It includes all the technical details, setup instructions, and features of your **Oracle Forensic System**.
-
-You can copy and paste this directly into a file named `README.md` on GitHub.
-
 ---
 
 # 🕵️‍♂️ Oracle Forensic System
@@ -98,7 +94,7 @@ SECRET_KEY=your_super_secret_key_here
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/oracle_forensic?retryWrites=true&w=majority
 
 # AI Configuration
-YOLO_WEIGHTS=yolov8n.pt
+YOLO_WEIGHTS=yolov8m.pt
 CAPTION_MODEL=Salesforce/blip-image-captioning-base
 
 # Storage Paths
@@ -175,28 +171,6 @@ oracle-forensic/
 └── README.md               # Documentation
 
 ```
-
----
-
-## 🛡️ Troubleshooting
-
-### Login Loop / "Invalid Credentials"
-
-If you are deploying to **Hugging Face Spaces** or a cloud provider and cannot log in:
-
-1. Ensure your `MONGO_URI` is correct in the Secrets/Environment variables.
-2. The app uses `ProxyFix` and secure cookies. Try accessing the app via the **Direct URL** (e.g., `https://your-app-name.hf.space`) instead of the embedded iframe.
-3. Use the `/reset-admin` route (if enabled in `app.py`) to force-create a user.
-
-### AI Service Unavailable
-
-If the AI crashes on the cloud (e.g., Hugging Face Free Tier):
-
-1. Ensure you are using the **Nano** model (`yolov8n.pt`) in your `.env`.
-2. The `setup_models.py` script attempts to download models during the build phase to prevent runtime timeouts.
-
----
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -204,12 +178,6 @@ If the AI crashes on the cloud (e.g., Hugging Face Free Tier):
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 

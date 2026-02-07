@@ -184,5 +184,12 @@ oracle-forensic/
 > *Final Year Project - 2026*
 
 ```
+## 📸 Screenshots
+
+| **Investigator Login Portal** | **Case Dashboard** |
+|:---:|:---:|
+| ![Login Page](screenshots/Login.png) | ![Dashboard](screenshots/dashboard.png) |
+
+> *The system features a secure, dark-themed interface designed for low-light environments typical in forensic labs.*
 
 ```

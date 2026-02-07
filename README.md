@@ -1,8 +1,14 @@
----
 
 # 🕵️‍♂️ Oracle Forensic System
 
-> **Authorized Accident Investigation Portal** > *Automated Forensic Analysis using AI & Computer Vision*
+> **Authorized Accident Investigation Portal**
+> *Automated Forensic Analysis using AI & Computer Vision*
+
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![Flask](https://img.shields.io/badge/Flask-2.0%2B-green?style=for-the-badge&logo=flask)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-4EA94B?style=for-the-badge&logo=mongodb)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker)
+![YOLOv8](https://img.shields.io/badge/YOLO-v8-yellow?style=for-the-badge)
 
 ## 📖 Overview
 
@@ -14,21 +20,15 @@ The system detects vehicles, pedestrians, and other critical objects, generates 
 
 * **🔐 Secure Authentication:** User login system with hashed passwords (Bcrypt) and session management.
 * **🖼️ Image Forensics:**
-* **Object Detection:** Identifies cars, persons, trucks, and traffic signs using **YOLOv8**.
-* **Scene Captioning:** Generates textual descriptions of the scene using **Salesforce BLIP**.
-
-
+    * **Object Detection:** Identifies cars, persons, trucks, and traffic signs using **YOLOv8**.
+    * **Scene Captioning:** Generates textual descriptions of the scene using **Salesforce BLIP**.
 * **🎥 Video Forensics:**
-* Frame-by-frame analysis of accident footage.
-* Automated extraction of key evidence frames.
-
-
+    * Frame-by-frame analysis of accident footage.
+    * Automated extraction of key evidence frames.
 * **📄 Automated Reporting:** Generates professional **PDF Reports** containing:
-* Case details & timestamps.
-* Annotated evidence images.
-* AI-generated summary and object counts.
-
-
+    * Case details & timestamps.
+    * Annotated evidence images.
+    * AI-generated summary and object counts.
 * **☁️ Cloud Ready:** Dockerized and optimized for deployment on **Hugging Face Spaces** or **AWS**.
 
 ---
@@ -39,11 +39,9 @@ The system detects vehicles, pedestrians, and other critical objects, generates 
 * **Backend:** Python (Flask)
 * **Database:** MongoDB Atlas (Cloud)
 * **AI Models:**
-* `ultralytics` (YOLOv8n - Nano model for speed)
-* `transformers` (BLIP Image Captioning)
-* `deepface` (Facial Analysis - Optional)
-
-
+    * `ultralytics` (YOLOv8n - Nano model for speed)
+    * `transformers` (BLIP Image Captioning)
+    * `deepface` (Facial Analysis - Optional)
 * **Deployment:** Docker, Gunicorn
 
 ---
@@ -59,7 +57,7 @@ The system detects vehicles, pedestrians, and other critical objects, generates 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/oracle-forensic.git
+git clone [https://github.com/YOUR_USERNAME/oracle-forensic.git](https://github.com/YOUR_USERNAME/oracle-forensic.git)
 cd oracle-forensic
 
 ```
@@ -94,7 +92,8 @@ SECRET_KEY=your_super_secret_key_here
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/oracle_forensic?retryWrites=true&w=majority
 
 # AI Configuration
-YOLO_WEIGHTS=yolov8m.pt
+# Use 'yolov8n.pt' (Nano) for speed/cloud free tier, or 'yolov8m.pt' for accuracy
+YOLO_WEIGHTS=yolov8n.pt
 CAPTION_MODEL=Salesforce/blip-image-captioning-base
 
 # Storage Paths
@@ -129,19 +128,18 @@ Access the app at: `http://localhost:7860`
 This project is fully containerized. To run it using Docker:
 
 1. **Build the Image:**
+
 ```bash
 docker build -t oracle-forensic .
 
 ```
 
-
 2. **Run the Container:**
+
 ```bash
 docker run -p 7860:7860 --env-file .env oracle-forensic
 
 ```
-
-
 
 ---
 
@@ -171,6 +169,7 @@ oracle-forensic/
 └── README.md               # Documentation
 
 ```
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -181,4 +180,9 @@ oracle-forensic/
 
 ---
 
-> **Created by Jo** > *Final Year Project - 2026*
+> **Created by Jo**
+> *Final Year Project - 2026*
+
+```
+
+```
